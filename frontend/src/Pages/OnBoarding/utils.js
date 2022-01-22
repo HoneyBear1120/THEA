@@ -5,13 +5,13 @@ import * as yup from "yup";
 
 export const initialValues={
     email: "",
-    password: "",
+    // password: "",
     remberme: []
 }
 
 export const validationSchema=yup.object().shape({
-    email: yup.string().email("Enter a valid Email").required("Required"),
-    password: yup.string().required("required"),
+    email: yup.string().email("Enter a valid Email").required("This field is required"),
+    // password: yup.string().required("required"),
     // remberme: yup.array().length(1, "..")
 })
 
@@ -23,8 +23,8 @@ export const initialValues_CreateAccount={
     firstName:'',
     lastName:'',
     email:'',
-    password:'',
-    cnfpassword:'',
+    // password:'',
+    // cnfpassword:'',
     agree:[]
  }
  
@@ -33,10 +33,10 @@ export const initialValues_CreateAccount={
     firstName:yup.string('Invalid').matches(/^[a-zA-Z]*$/, 'Only alphabets allowed').max(30, 'Must be less than 30 chars').required('First name required'),
     lastName:yup.string('Invalid').matches(/^[a-zA-Z]*$/, 'Only alphabets allowed').max(30, 'Must be less than 30 chars').required('Last name required'),
     email:yup.string('Invalid').email('Invalid Email').max(80, 'Must be less than 80 chars').required('Valid email required'),
-    cnfpassword:yup.string('Invalid').oneOf([yup.ref('password')], 'Password must match').required('Confirm password required'),
+    // cnfpassword:yup.string('Invalid').oneOf([yup.ref('password')], 'Password must match').required('Confirm password required'),
     agree:yup.array().length(1,'You must agree with the our terms and privacy'),
-    password:yup.string().min(8,'Minimum 8 Characters Needed').matches(/^.*[!@#$%^&*()_+\-=\]{};':"\\|,.<>?].*$/,
-    'Need at least one special character',).matches(/^(?=.{0,100}$)\D*\d/,'Need at least a number').matches(/[a-z]/,'At least one lowercase letter required').matches(/[A-Z]/,'At least one uppercase letter required').required('Required'),
+    // password:yup.string().min(8,'Minimum 8 Characters Needed').matches(/^.*[!@#$%^&*()_+\-=\]{};':"\\|,.<>?].*$/,
+    // 'Need at least one special character',).matches(/^(?=.{0,100}$)\D*\d/,'Need at least a number').matches(/[a-z]/,'At least one lowercase letter required').matches(/[A-Z]/,'At least one uppercase letter required').required('Required'),
     // yup.string().min(8,'Minimum 8 Characters Needed').max(30, 'Must be less than 30 chars').matches(/^.*[!@#$%^&*()_+\-=\]{};':"\\|,.<>?].*$/,
     // 'Need at least one special character',).matches(/^(?=.{0,100}$)\D*\d/,'Need at least a number')  .required('Password required'),
 })

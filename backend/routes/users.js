@@ -8,6 +8,7 @@ const validation=require('../utils/schema');
 
 router.post('/CreateAccount',controllers.signUp);
 router.post('/SignIn',controllers.signIn);
+router.post('/RequestCode', controllers.requestCode);
 router.post('/Otp',controllers.otpVerify);
 router.post('/ForgetPassword',validation.raiseRequest,controllers.forgotPassword);
 router.post('/ResetPassword',validation.validate_reset_body,controllers.resetPassword);

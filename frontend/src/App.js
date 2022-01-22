@@ -1,6 +1,7 @@
 import React from "react";
 import {withRouter, Switch, Route } from "react-router-dom";
 import SignIn from "./Pages/OnBoarding/SignIn";
+import RequestCode from "./Pages/OnBoarding/RequestCode";
 import "./Assets/css/theme.css";
 import "./Assets/css/Responsive.css";
 import "./Assets/css/custom.css";
@@ -27,6 +28,9 @@ const App=(props)=> {
         <Switch>
           <Route exact path="/">
             <SignIn />
+          </Route>
+          <Route exact path="/RequestCode">
+            <RequestCode />
           </Route>
           <PrivateRoute exact path="/dashboard" component={Dashboard}/>
           <PrivateRoute path='/cabinet' component={Cabinet} />

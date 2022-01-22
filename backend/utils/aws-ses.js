@@ -5,8 +5,18 @@
  */
 // Load the AWS SDK for Node.js
 var AWS = require('aws-sdk');
+
+AWS.config.update({
+    region: 'us-east-1',
+    apiVersion: '2010-12-01',
+    credentials: {
+        accessKeyId: 'AKIAUNRYPVUQMB5KHUPS',
+        secretAccessKey: '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'
+    }
+})
+
 // Set the region 
-AWS.config.update({ region: 'us-east-1'});
+// AWS.config.update({ region: 'us-east-1' });
 // Create sendEmail params 
 exports.sendMail = function (to, cc, subject, htmlBody, txtBody, from, replyTo) {
     //const from = '';

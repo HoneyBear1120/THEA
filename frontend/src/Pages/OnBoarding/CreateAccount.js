@@ -14,8 +14,8 @@ class CreateAccount extends Component {
 
     state = {
         loader: false,
-        password_toggle_1: false,
-        password_toggle_2: false,
+        // password_toggle_1: false,
+        // password_toggle_2: false,
         error:{
             isMounted:false,
             type:'',
@@ -38,13 +38,13 @@ class CreateAccount extends Component {
         }
     }
 
-    passwordToggle1 = () => {
-        this.setState({ password_toggle_1: !this.state.password_toggle_1 })
-    }
+    // passwordToggle1 = () => {
+    //     this.setState({ password_toggle_1: !this.state.password_toggle_1 })
+    // }
 
-    passwordToggle2 = () => {
-        this.setState({ password_toggle_2: !this.state.password_toggle_2 })
-    }
+    // passwordToggle2 = () => {
+    //     this.setState({ password_toggle_2: !this.state.password_toggle_2 })
+    // }
 
 
 
@@ -54,7 +54,7 @@ class CreateAccount extends Component {
             firstName:value.firstName,
             lastName:value.lastName,
             email: value.email,
-            password: value.password
+            // password: value.password
           }
           
         //  console.log(obj);
@@ -75,7 +75,7 @@ class CreateAccount extends Component {
         }).catch(error => {
     
 
-            console.log(error.response);
+            // console.log(error);
 
             this.setState({ error: {
                 isMounted:true,
@@ -100,7 +100,8 @@ class CreateAccount extends Component {
               
                     <div className="w-100">
                          
-                        <div className="card px-5 mb-0">
+                        {/* <div className="card px-5 mb-0"> */}
+                        <div className="px-5 mb-0">
                             <div className="col-12 col-md-12 col-xl-12 my-5 bg-white">  
                         
                                 <h1 className="display-4 text-center mb-3">
@@ -140,7 +141,7 @@ class CreateAccount extends Component {
                                                 <ErrorMessage name="email" className="text-danger" render={msg=><FormError message={msg} ></FormError>}/>
                                                 </ErrorContainer>
                                             </div>
-                                            <div className="form-group">
+                                            {/* <div className="form-group">
                                                 <label className='label-font'>Password</label>
                                                 <div className="input-group input-group-merge">
                                                     <Field name="password" id="password" type={this.state.password_toggle_1 ? 'text' : 'password'} className={`form-control form-control-appended font-weight-400 input_kit ${formik.touched.password && formik.errors.password ? 'border border-danger' : ''}`} placeholder="8+ characters required" />
@@ -169,7 +170,7 @@ class CreateAccount extends Component {
                                                 <ErrorContainer>
                                                 <ErrorMessage name="cnfpassword" render={msg=><FormError message={msg} ></FormError> } />
                                                 </ErrorContainer>
-                                            </div>
+                                            </div> */}
                                            
                                             <div className="form-group">
                                                 <div className="custom-control custom-checkbox cs_check_input checklist-control my-4">

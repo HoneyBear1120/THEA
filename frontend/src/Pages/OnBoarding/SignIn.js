@@ -1,13 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Form, Field, Formik } from "formik";
+import { Form, Field, Formik, ErrorMessage } from "formik";
 import { Login } from '../../ApiController/baseUrl';
 import { useHistory } from "react-router-dom";
 import { useState, useEffect } from 'react'
 import { initialValues, validationSchema } from './utils';
 import Spinner from '../Components/Spinner';
 import Alert from '../Components/Alert';
-import {useDispatch} from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { ErrorContainer } from '../Components/errorContainer'
+import FormError from '../Components/FormError';
 
 export default function SignIn() {
 
@@ -18,10 +20,10 @@ export default function SignIn() {
     isMounted: false,
     type: '',
     message: '',
-    color : ""
+    color: ""
   });
 
-  const dispatcher=useDispatch();
+  const dispatcher = useDispatch();
   let history = useHistory();
 
 
@@ -33,22 +35,22 @@ export default function SignIn() {
   useEffect(() => {
     //here the get the local storage function.
     const userToken = localStorage.getItem('token');
-    if(userToken){
+    if (userToken) {
       history.replace('/dashboard');
       return;
     }
-  
+
     if (history.location.state) {
-      setAlert({ isMounted: true, type:history.location.state.type, message:history.location.state.message, color : history.location.state.color})
-      setTimeout(() =>{
+      setAlert({ isMounted: true, type: history.location.state.type, message: history.location.state.message, color: history.location.state.color })
+      setTimeout(() => {
         history.push({
-          state:{
-            message : "",
-            type : ""
+          state: {
+            message: "",
+            type: ""
           }
         })
       }, 1000)
-       console.log("history", history)
+      console.log("history", history)
     }
 
   }, [])
@@ -70,7 +72,7 @@ export default function SignIn() {
 
     Login(`/users/SignIn`, value).then(result => {
 
-    dispatcher({ type: 'CHANGE_PAGE',payload:'Otp'})
+      dispatcher({ type: 'CHANGE_PAGE', payload: 'Otp' })
       setloader(false)
       history.push({
         pathname: '/Otp',
@@ -79,8 +81,8 @@ export default function SignIn() {
         }
       })
     }).catch(errors => {
-      if (errors.response?.status == 403) setAlert({ isMounted: true, type: 'alert-danger', message: errors.response.data.msg })
-      else setAlert({ isMounted: true,type: 'alert-danger', message: `${errors.message}`})
+      if (errors.response ?.status == 403) setAlert({ isMounted: true, type: 'alert-danger', message: errors.response.data.msg })
+      else setAlert({ isMounted: true, type: 'alert-danger', message: `${errors.message}` })
 
       setloader(false)
     })
@@ -92,7 +94,8 @@ export default function SignIn() {
     <div className="bg-cover d_grid h_100">
       <div className="center_login_container">
         <div className="w-100 mb-">
-          <div className="card px-5 mb-0">
+          {/* <div className="card px-5 mb-0"> */}
+          <div className="px-5 mb-0">
             <div className="col-12 col-md-12 col-xl-12 my-5 bg-white">
               <h1 className="display-4 text-center mt-3 mb-3">Sign In</h1>
               <p className="text-muted text-center mb-5">
@@ -110,17 +113,21 @@ export default function SignIn() {
                   <Form>
 
                     <div className="form-group">
-                      <label>Your email</label>
+                      <label className={` ${formik.touched.email && formik.errors.email ? 'text-danger' : ''}`}>Your email</label>
                       <Field
                         name="email"
                         id="email"
                         type="email"
                         className={`form-control font-weight-400 border_input input_kit ${formik.touched.email && formik.errors.email ? 'border border-danger' : ''}`}
-                        placeholder={formik.touched.email && formik.errors.email ? formik.errors.email : 'email@address.com'}
+                        // placeholder={formik.touched.email && formik.errors.email ? formik.errors.email : 'email@address.com'}
+                        placeholder="email@address.com"
                         autoComplete="true"
                       />
+                      <ErrorContainer>
+                        <ErrorMessage name="email" className="text-danger" render={msg => <FormError message={msg} ></FormError>} />
+                      </ErrorContainer>
                     </div>
-                    <div className="form-group">
+                    {/* <div className="form-group">
                       <div className="row">
                         <div className="col">
                           <label>Password</label>
@@ -154,7 +161,7 @@ export default function SignIn() {
                           </span>
                         </div>
                       </div>
-                    </div>
+                    </div> */}
                     <div className="form-group">
                       <div className="custom-control custom-checkbox checklist-control my-4 form-check">
                         {/* <input type="text" id="remberme" /> */}

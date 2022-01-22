@@ -46,7 +46,7 @@ h6 {
 }
 
 .bg-cover {
-  background-image: url(../images/SignIn_bg.svg);
+  /* background-image: url(../images/SignIn_bg.svg); */
 }
 
 .font-size-16 {
